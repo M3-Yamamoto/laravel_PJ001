@@ -14,4 +14,4 @@
 Route::get('/',function(){
 	dd(app('test'));
 });
-Route::get('recipe', 'RecipeController@index');
+Route::resource('recipe', 'RecipeController');
