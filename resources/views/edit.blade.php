@@ -26,8 +26,12 @@
       <input type="text" name="ingredients" class="form-control" value="{{ $recipe->ingredients }}" required>
     </div>
     <div class="form-group">
-      <label>Category</label>
-      <input type="text" name="category"  class="form-control" value="{{ $recipe->category }}" required>
+      <select class="form-control" name="category">
+        @foreach($category as $value)
+          <option value="{{ $value->id }}"
+          {{ $recipe->categories->id == $value->id ? "selected" : "" }}>{{ $value->name }}</option>
+        @endforeach
+      </select>
     </div>
        <button type="submit" class="btn btn-primary">Submit</button>
   </form>

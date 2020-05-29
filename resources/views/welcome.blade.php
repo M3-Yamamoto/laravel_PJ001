@@ -13,18 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-        			<div class="container">
-        				<h2>Home Page</h2>
-        				    <div>
-        					   <a href="/recipe/create"><button class="btn btn-success">Create</button></a>
-        					</div>
-        				@foreach($data as $value)
-        					<a href="/recipe/{{ $value->id }}">	<li>{{ $value->name }}</li></a>
-        				<hr>
-        				@endforeach
-        			</div>
-
+                    Please Login to continue!!
                 </div>
             </div>
         </div>

@@ -11,7 +11,10 @@
 |
 */
 
-Route::get('/',function(){
-	dd(app('test'));
-});
+// Route::get('/',function(){
+// 	dd(app('test'));
+// });
 Route::resource('recipe', 'RecipeController');
+Route::get('home', 'HomeController@index');
+
+Auth::routes();

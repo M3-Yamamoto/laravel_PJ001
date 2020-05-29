@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Recipe;
+use App\Category;
 use Illuminate\Http\Request;
 
 class RecipeController extends Controller
-{
+{   
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,7 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        $data = Recipe::all();
+        $data = Recipe::where('author_id', auth()->id())->get();
 
         return view('home',compact('data'));
     }
@@ -26,7 +32,8 @@ class RecipeController extends Controller
      */
     public function create()
     {
-        return view('create');
+        $category = Category::all();
+        return view('create',compact('category'));
     }
 
     /**
@@ -41,9 +48,10 @@ class RecipeController extends Controller
             'name' => 'required',
             'ingredients' => 'required',
             'category' => 'required',
+          
         ]);
 
-        Recipe::create($validatedData);
+        Recipe::create($validatedData + ['author_id' => auth()->id()]);
 
         return redirect("recipe");
 
@@ -56,8 +64,9 @@ class RecipeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Recipe $recipe)
-    {
-      return view('show',compact('recipe'));
+    { 
+        $this->authorize('view',$recipe);
+        return view('show',compact('recipe'));
     }
 
     /**
@@ -67,8 +76,10 @@ class RecipeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Recipe $recipe)
-    {
-        return view('edit',compact('recipe'));
+    {   
+        $this->authorize('view',$recipe);
+        $category = Category::all();
+        return view('edit',compact('recipe','category'));
     }
 
     /**
@@ -79,11 +90,13 @@ class RecipeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Recipe $recipe)
-    {
-      $validatedData = request()->validate([
-        'name' => 'required',
-        'ingredients' => 'required',
-        'category' => 'required',
+    { 
+        $this->authorize('view',$recipe);
+          
+        $validatedData = request()->validate([
+            'name' => 'required',
+            'ingredients' => 'required',
+            'category' => 'required',
     ]);
 
       $recipe->update($validatedData);
@@ -98,7 +111,8 @@ class RecipeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Recipe $recipe)
-    {
+    {   
+        $this->authorize('view',$recipe);
         $recipe->delete();
         return redirect("recipe");
 
