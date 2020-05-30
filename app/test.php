@@ -2,12 +2,13 @@
 
 namespace App;
 
-class test {
-
+class test 
+{
 	public $something;
 
 	public function __construct($something)
 	{
 		$this->something = $something;
 	}
+
 }

@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Recipe;
 use App\Category;
+use App\test;
+use App\Mail\RecipeStored;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class RecipeController extends Controller
 {   
@@ -19,7 +22,7 @@ class RecipeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
         $data = Recipe::where('author_id', auth()->id())->get();
 
         return view('home',compact('data'));
@@ -51,7 +54,7 @@ class RecipeController extends Controller
           
         ]);
 
-        Recipe::create($validatedData + ['author_id' => auth()->id()]);
+        $recipe = Recipe::create($validatedData + ['author_id' => auth()->id()]);
 
         return redirect("recipe");
 
@@ -64,7 +67,7 @@ class RecipeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Recipe $recipe)
-    { 
+    {   
         $this->authorize('view',$recipe);
         return view('show',compact('recipe'));
     }

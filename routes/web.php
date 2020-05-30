@@ -1,5 +1,6 @@
 <?php
 
+use App\Recipe;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,7 +11,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 // Route::get('/',function(){
 // 	dd(app('test'));
 // });

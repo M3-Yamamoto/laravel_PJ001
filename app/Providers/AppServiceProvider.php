@@ -13,9 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-         app()->bind('test',function(){
-        return new  \App\test('some important key!');
-        });
+         //
     }
 
     /**
