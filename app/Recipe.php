@@ -4,6 +4,7 @@ namespace App;
 
 use App\Mail\RecipeStored;
 use App\Category;
+use App\Events\RecipeCreatedEvent;
 use Illuminate\Database\Eloquent\Model;
 
 class Recipe extends Model
@@ -15,6 +16,11 @@ class Recipe extends Model
         return $this->belongsTo(Category::class,'category');
     }
 
+    public $dispatchesEvents = [
+
+        'created' => RecipeCreatedEvent::class, 
+    ];
+
     protected static function boot()
     {
     	parent::boot();
@@ -22,8 +28,6 @@ class Recipe extends Model
     	static::created(function ($recipe){
 
         session()->flash("message",'Recipe has created successfully!');
-
-        \Mail::to('maxmk978@gmail.com')->send(new RecipeStored ($recipe));
 
     	});
     }

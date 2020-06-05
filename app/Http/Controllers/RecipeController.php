@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Recipe;
 use App\Category;
 use App\test;
+use App\User;
 use App\Mail\RecipeStored;
+use App\Events\RecipeCreatedEvent;
+use App\Notifications\RecipeStoredNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -23,7 +26,13 @@ class RecipeController extends Controller
      */
     public function index()
     {   
-        $data = Recipe::where('author_id', auth()->id())->get();
+        // $user = User::find(3);
+        // $user->notify(new RecipeStoredNotification());
+        // echo "sent notification";
+        // exit();
+
+        $data = Recipe::paginate(5);
+        // where('author_id', auth()->id())->get()
 
         return view('home',compact('data'));
     }

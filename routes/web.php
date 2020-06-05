@@ -1,6 +1,7 @@
 <?php
 
 use App\Recipe;
+Use App\category;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,5 +17,8 @@ use App\Recipe;
 // });
 Route::resource('recipe', 'RecipeController');
 Route::get('home', 'HomeController@index');
+Route::get('/','PublicController@index');
+Route::get('detail/{id}','PublicController@detail');
+Route::resource('category','CategoryController');
 
 Auth::routes();

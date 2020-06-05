@@ -19,13 +19,12 @@
                     </div>
                     @endif
     				    <div>
-    					   <a href="/recipe/create"><button class="btn btn-success">Create</button></a>
+    					   <a href="/category/create"><button class="btn btn-success">Create</button></a>
     					</div>
     				@foreach($data as $value)
-    					<a href="/recipe/{{ $value->id }}">	<li>{{ $value->name }}</li></a>
+    					<a href="/category/{{ $value->id }}">	<li>{{ $value->name }}</li></a>
     				<hr>
     				@endforeach
-                    {{ $data->links() }}
     			</div>
             </div>
         </div>
