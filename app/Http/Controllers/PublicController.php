@@ -7,6 +7,7 @@ use App\Recipe;
 
 class PublicController extends Controller
 {
+
     public function index()
     {	
     	$recipes = Recipe::paginate(9);

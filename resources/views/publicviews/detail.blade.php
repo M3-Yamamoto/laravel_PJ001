@@ -37,8 +37,12 @@
               <div class="card mb-12 box-shadow">
                 <div class="card-body">
                   <h3>{{ $recipe->name }}</h3>
+                  @if($recipe->image)
+                    <img src="{{'/images/'.$recipe->image}}" width="100" height="100">
+                  @endif
                   <p class="card-text">{{ $recipe->ingredients }}</p>
                   <p>{{ $recipe->categories->name}}</p>
+                  <p>date - {{ $recipe->created_at }}</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                     <a href="/"><button type="button" class="btn btn-sm btn-outline-secondary">Back</button></a>

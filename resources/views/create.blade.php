@@ -14,7 +14,8 @@
       </div>
   @endif
 
-  <form method="post" action="/recipe">
+  <!-- <form method="post" action="/recipe"> -->
+  <form method="POST" action="/recipe" enctype="multipart/form-data">
    {{ csrf_field() }}
     <div class="form-group">
       <label>Recipe Name</label>
@@ -31,6 +32,11 @@
         @endforeach
       </select>
     </div>
+
+   <div class="form-group">
+        <label for=""> Recipe Image</label><br>
+        <input type="file" name="rimage">
+      </div>
        <button type="submit" class="btn btn-primary">Submit</button>
   </form>
   </div>

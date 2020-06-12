@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Recipe extends Model
 {
-    protected $fillable = ['name','ingredients','category','author_id'];
+
+    protected $fillable = ['name','ingredients','category','author_id','image'];
+
 
     public function categories()
     {

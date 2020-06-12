@@ -5,6 +5,8 @@
       <h2>{{ $recipe->name }}</h2>
       <li>Ingredients - {{ $recipe->ingredients }}</li>
       <li>Category - {{ $recipe->categories->name}}</li>
+      <img src="{{'/images/'.$recipe->image}}" width="150" height="150" alt="">
+      <br>
       <a href="/recipe/{{ $recipe->id }}/edit"> <button class="btn btn-success">Edit</button></a>
 
       <form method="post" action="/recipe/{{ $recipe->id }}">

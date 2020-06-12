@@ -60,10 +60,16 @@ class RecipeController extends Controller
             'name' => 'required',
             'ingredients' => 'required',
             'category' => 'required',
+            'rimage' => 'required|image',
           
         ]);
+        
+        $imageName = date('YmdHis') . "." . request()->rimage->getClientOriginalExtension();
+        request()->rimage->move(public_path('images'), $imageName);
 
-        $recipe = Recipe::create($validatedData + ['author_id' => auth()->id()]);
+        $recipe = Recipe::create($validatedData + ['author_id' => auth()->id(),'image'=>$imageName]);
+
+        // $recipe = Recipe::create($validatedData + ['author_id' => auth()->id()]);
 
         return redirect("recipe");
 
@@ -109,9 +115,16 @@ class RecipeController extends Controller
             'name' => 'required',
             'ingredients' => 'required',
             'category' => 'required',
+            'rimage' => 'image',
     ]);
 
-      $recipe->update($validatedData);
+  $recipe->update($validatedData);
+    if (request()->rimage) {
+      //upload image
+      $imageName = date('YmdHis') . "." . request()->rimage->getClientOriginalExtension();
+      request()->rimage->move(public_path('images'), $imageName);
+    }
+    $recipe->update($validatedData + ['image'=> empty($imageName) ? null : $imageName]);
 
       return redirect("recipe");
     }

@@ -15,6 +15,7 @@
   @endif
 
   <form method="post" action="/recipe/{{ $recipe->id }}">
+  <form method="POST" action="/recipe/{{ $recipe->id }}" enctype="multipart/form-data">
     {{ method_field("PATCH") }}
    {{ csrf_field() }}
     <div class="form-group">
@@ -33,6 +34,12 @@
         @endforeach
       </select>
     </div>
+
+    <div class="form-group">
+        <label for=""> Recipe Image</label><br>
+        <input type="file" name="rimage"><br><br>
+        <img src="{{'/images/'.$recipe->image}}" width="150" height="150">
+      </div>
        <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 

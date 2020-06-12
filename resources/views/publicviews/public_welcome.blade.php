@@ -38,6 +38,9 @@
               <div class="card mb-4 box-shadow">
                 <div class="card-body">
                   <h3>{{ $recipe->name}}</h3>
+                  @if($recipe->image)
+                      <img src="{{'/images/'.$recipe->image}}" width="50" height="50">
+                    @endif
                   <p class="card-text">{{ $recipe->categories->name }}</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
